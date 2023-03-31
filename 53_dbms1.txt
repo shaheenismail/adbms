@@ -1,0 +1,51 @@
+-- 
+-- Roll No: 53
+-- Name: Shaheen Ismail
+-- Program: 
+-- 
+
+
+--
+-- Table structure for table dept
+--
+create table dept ( dno char(5)  primary key, dname varchar(10) UNIQUE,location varchar(15));
+
+alter table dept add mgr_ssn int;
+alter table dept add constraint foreign key (mgr_ssn) references employee(ssn);
+
+
+--
+-- Table structure for table employee
+--
+create table employee ( ssn int primary key, name varchar(10), address varchar(20), dnum char(5) );
+
+alter table employee add super_ssn int;
+alter table employee add constraint foreign key (super_ssn) references employee(ssn);
+alter table employee add constraint foreign key (dnum) references dept(dno);
+
+--
+-- Dumping data for table dept
+--
+insert into dept value ("d01","developer","Room 01");
+insert into dept value ("d02","pharmist","Room 02");
+insert into dept value ("d03","accountant","Room 03");
+insert into dept value ("d04","designer","Room 04");
+insert into dept value ("d05","team lead","Room 05");
+
+--
+-- Dumping data for table employee
+--
+insert into employee value (1,"shaheen","malappuram","d01");
+insert into employee value (2,"al hajeesh","koottayi","d02");
+insert into employee value (3,"mushfiq","valancherry","d03");
+insert into employee value (4,"fayis","kolathur","d04");
+insert into employee value (5,"falah","kadampuzha","d05");
+
+-- --------insert/update statement commands----------- # This line may be removed in the actcual file
+
+--
+-- SQl Query Statements
+--
+
+-- -----SQL query statments preceeded by the its question-------- # This line may be removed in the actual file
+-- -----Question number should be commented---------------#This line may be removed in the actual file
