@@ -1,0 +1,86 @@
+-- 
+-- Roll No: 53
+-- Name: Shaheen Ismail
+-- Program: Assignment IV
+-- 
+
+
+--
+-- Table structure for table <table_name>
+--
+
+-- ---------create/alter statement commands----------- # This line may be removed in the actual file
+
+--
+-- Dumping data for table <table_name>
+--
+
+-- --------insert/update statement commands----------- # This line may be removed in the actcual file
+
+--
+-- SQl Query Statements
+--
+
+-- Q1:Display all details of employee table.
+select * from employee;	
+
+-- Q2:Display ssn, name, dnum of all employees.
+select ssn,name,dnum from employee;
+
+-- Q3:Display ssn, name, dnum of all employees whose salary greater than 20,000.
+select ssn,name,dnum from employee where salary>%s;
+
+-- Q4:Display all details of department table eliminating duplicate values in the department location.
+select distinct location from dept;
+
+-- Q5:Display ssn, name of all employees whose work for the department located at 'Stafford'.
+select ssn,name from employee join dept on dnum=dno where location=%s;
+
+-- Q6:Display ss, name of all employees who are either work for the department 'Research' or 'Admin'.
+select ssn,name from dept join employee on dno=dnum where dname=%s or dname=%s;
+
+-- Q7:Display all details of employee table in the descending order of their salary.
+select * from employee order by salary desc;
+
+-- Q8:Display ssn, name of all employees who do not have supervisors.
+select ssn,name from employee where super_ssn is null;
+
+-- Q9:Display ssn, name of highest paid employee(s).
+select ssn,name from employee where salary in(select max(salary) from employee);
+
+-- Q10:Display ssn, name of the lowest paid employee(s).
+select ssn,name from employee where salary in (select min(salary) from employee);
+
+-- Q11:Display all employee(s) whose name starts with 's'.
+select * from employee where name like ’s%’;
+
+-- Q12:Display all employee(s) whose name ends with 'e'.
+select * from employee where name like ‘%e’;
+
+-- Q13:Display all employee(s) with letter 'a' anywhere in their name.
+select * from employee where name like ‘%a%’;
+
+-- Q14:Display number, name of the department and the total salary (give 'total_salary' for this column) they pay.
+select dno,dname,sum(salary) as total_salary from dept join employee on dno=dnum group by dno;
+
+-- Q15:Display the number, name, location and the total salary (give 'total_salary' for this column) of the department paying rupees above 50,000.
+select dno,dname,location,sum(salary) as total_salary from dept join employee on dno=dnum where salary>%s group by dno;
+
+-- Q16:Display the number, name, location and the total salary (give 'total_salary' for this column) of the department paying rupees above 50,000 in the ascending order of their payment.
+select dno,dname,location,sum(salary) as total_salary from dept join employee on dno=dnum group by dno having total_salary>%s order by total_salary asc;
+
+-- Q17:Display ssn, name of all employees who are not working on any project.
+select ssn,name from employee where ssn not in (select essn from workson);
+
+-- Q18:Display ssn, name of all employees who are supervisors.
+select ssn,name from employee where ssn=super_ssn;
+
+-- Q19:Display ssn, name of all employees whose salary is greater than the salary of all the employees in the 'Research' department.
+select ssn,name from employee where salary > (select max(salary) from dept join employee on dno=dnum where dname=%s);
+
+
+-- Q20:For evey project located in 'Stafford', list the project number, the controlling department number, department name and the department manager's name.
+select p.pnumber,p.dnum,d.dname,e.name from project p join dept d on p.dnum=d.dno join employee e on d.mgr_ssn=ssn where p.plocation=%s;
+
+-- -----SQL query statments preceeded by the its question-------- # This line may be removed in the actual file
+-- -----Question number should be commented---------------#This line may be removed in the actual file
